@@ -7,7 +7,7 @@
     "uuid": "./bin/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "uuid",
@@ -22,5 +22,8 @@
     "command-line-args": "^5.1.1",
     "command-line-usage": "^6.1.1",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
   }
 }
