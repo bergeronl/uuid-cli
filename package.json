@@ -1,0 +1,26 @@
+{
+  "name": "@lbergeron/uuid-cli",
+  "version": "0.1.0",
+  "description": "Command-line utility to generate, and validate UUIDs.",
+  "main": ".bin/index.js",
+  "bin": {
+    "uuid": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "uuid",
+    "command-line",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "clipboardy": "^2.3.0",
+    "command-line-args": "^5.1.1",
+    "command-line-usage": "^6.1.1",
+    "uuid": "^8.3.2"
+  }
+}
