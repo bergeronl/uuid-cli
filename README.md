@@ -1,6 +1,10 @@
 # uuid-cli
 Command-line tool for generating and validating UUIDs.
 
+## Installation
+
+    > npm install -g @lbergeron/uuid-cli
+
 ## Generating a random UUID
 
 Simply call the executable with no arguments. A random UUID v4 will be generated and copied to the clipboard.

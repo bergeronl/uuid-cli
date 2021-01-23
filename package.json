@@ -14,8 +14,16 @@
     "command-line",
     "cli"
   ],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bergeronl/uuid-cli.git"
+  },
+  "author": "bergeronl",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bergeronl/uuid-cli/issues"
+  },
+  "homepage": "https://github.com/bergeronl/uuid-cli#readme",
   "dependencies": {
     "chalk": "^4.1.0",
     "clipboardy": "^2.3.0",
