@@ -46,7 +46,6 @@ const cmdOptionSections = [
 ];
 
 let options;
-let jsonOutput;
 
 const log = (message) => {
     if (!options.quiet) {
@@ -59,6 +58,12 @@ const logv = (message) => {
         console.log(chalk.gray(message));
     }
 };
+
+const logw = (message) => {
+    if (!options.quiet && options.verbose) {
+        console.warn(chalk.yellow(message));
+    }
+}
 
 const loge = (message) => {
     if (!options.quiet) {
@@ -101,7 +106,12 @@ const generateScopedId = () => {
 };
 
 const copyAndPrintId = (id) => {
-    clip.writeSync(id);
+    try {
+        clip.writeSync(id);
+    } catch (error) {
+        logw('Clipboard is not available');
+    }
+    
     log(id);
     logv('id copied to clipboard');
 }

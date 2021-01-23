@@ -1,3 +1,6 @@
+const clip = require('clipboardy');
+jest.mock('clipboardy');
+
 const uuid = require('uuid');
 
 const cli = require('../src/cli');
@@ -55,6 +58,31 @@ describe('uuid-cli', () => {
             const output = cli({ quiet: true, ns: 'not a UUID', name: 'test' });
 
             expect(output.error).toBe("'not a UUID' is not a valid namespace value. A UUID was expected.");
+        });
+    });
+
+    describe('given clipboard not available', () => {
+        beforeEach(() => {
+            clip.writeSync.mockImplementation(() => {
+                throw new Error("Couldn't find the `xsel` binary and fallback didn't work. On Debian/Ubuntu you can install xsel with: sudo apt install xsel")
+            });
+        });
+
+        it('should not throw', () => {
+            expect(() => cli({ quiet: true })).not.toThrow();
+        });
+
+        it('should not report error', () => {
+            const output = cli({ quiet: true });
+
+            expect(output.error).toBe(undefined);
+        });
+
+        it('should output the UUID', () => {
+            const output = cli({ quiet: true });
+
+            expect(output.id).not.toBe(undefined);
+            expect(uuid.validate(output.id)).toBe(true);
         });
     });
 });
