@@ -6,7 +6,7 @@ const cmdUsage = require('command-line-usage');
 
 const cmdOptionDefinitions = [
     { name: 'ns', type: String },
-    { name: 'name', alias: 'n', type: String, defaultOption: true },
+    { name: 'name', alias: 'n', type: String, multiple: true, defaultOption: true },
     { name: 'verbose', alias: 'v', type: Boolean },
     { name: 'quiet', alias: 'q', type: Boolean },
     { name: 'help', alias: 'h', type: Boolean }
@@ -27,7 +27,7 @@ const cmdOptionSections = [
             {
                 name: 'name',
                 typeLabel: '{underline name}',
-                description: 'The name used to generate the UUID.'
+                description: 'The name used to generate the UUID. Specifying the name argument many times generates the ID recursively.'
             },
             {
                 name: 'verbose',
@@ -102,8 +102,19 @@ const generateScopedId = () => {
     logv(`Namespace: ${namespace}`);
     logv(`Name:      ${name}`);
 
-    return uuid.v5(name, namespace);
+    return generateRecursiveId([...name], namespace);
 };
+
+const generateRecursiveId = (names, namespace) => {
+    if (names.length === 0) {
+        return namespace;
+    }
+
+    const [currentName, ...otherNames] = names;
+    const nextNamespace = uuid.v5(currentName, namespace);
+
+    return generateRecursiveId(otherNames, nextNamespace);
+}
 
 const copyAndPrintId = (id) => {
     try {

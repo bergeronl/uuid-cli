@@ -49,6 +49,17 @@ describe('uuid-cli', () => {
         });
     });
 
+    describe('given multiple names', () => {
+        it('should generate UUID v5 using names recursively', () => {
+            const namespace = uuid.v4();
+            const expectedId = uuid.v5('second', uuid.v5('first', namespace));
+
+            const actual = cli({ quiet: true, ns: namespace, name: ['first', 'second']});
+
+            expect(actual.id).toBe(expectedId);
+        });
+    });
+
     describe('given invalid namespace', () => {
         it('should not throw', () => {
             expect(() => cli({ quiet: true, ns: 'not a UUID', name: 'test' })).not.toThrow();
