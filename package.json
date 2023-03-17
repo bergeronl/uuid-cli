@@ -33,6 +33,6 @@
   },
   "devDependencies": {
     "jest": "29.4.3",
-    "semantic-release": "20.1.0"
+    "semantic-release": "20.1.3"
   }
 }
