@@ -28,7 +28,7 @@
     "chalk": "^4.1.0",
     "clipboardy": "^2.3.0",
     "command-line-args": "^5.1.1",
-    "command-line-usage": "^6.1.1",
+    "command-line-usage": "^7.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
