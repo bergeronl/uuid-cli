@@ -2,12 +2,13 @@
   "name": "@lbergeron/uuid-cli",
   "version": "0.2.5",
   "description": "Command-line utility to generate, and validate UUIDs.",
+  "type": "module",
   "main": ".bin/index.js",
   "bin": {
     "uuid": "./bin/index.js"
   },
   "scripts": {
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [
     "uuid",
@@ -32,7 +33,9 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "jest": "29.7.0",
+    "@babel/core": "^7.23.2",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
     "semantic-release": "22.0.5"
   }
 }

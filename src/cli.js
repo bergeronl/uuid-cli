@@ -1,8 +1,8 @@
-const uuid = require('uuid');
-const clip = require('clipboardy');
-const chalk = require('chalk');
-const cmdParser = require('command-line-args');
-const cmdUsage = require('command-line-usage');
+import * as uuid from 'uuid';
+import * as clip from 'clipboardy';
+import * as chalk from 'chalk';
+import commandLineArgs from '../node_modules/command-line-args/dist/index.mjs';
+import * as cmdUsage from 'command-line-usage';
 
 const cmdOptionDefinitions = [
     { name: 'ns', type: String },
@@ -127,7 +127,7 @@ const copyAndPrintId = (id) => {
     logv('id copied to clipboard');
 }
 
-const run = (opts = cmdParser(cmdOptionDefinitions)) => {
+export const run = (opts = commandLineArgs(cmdOptionDefinitions)) => {
     options = opts;
 
     const output = {};
@@ -146,5 +146,3 @@ const run = (opts = cmdParser(cmdOptionDefinitions)) => {
 
     return output;
 };
-
-module.exports = run;
