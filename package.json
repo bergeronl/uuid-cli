@@ -1,6 +1,6 @@
 {
   "name": "@lbergeron/uuid-cli",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Command-line utility to generate, and validate UUIDs.",
   "type": "module",
   "main": ".bin/index.js",
