@@ -1,7 +1,7 @@
 import * as uuid from 'uuid';
 import * as clip from 'clipboardy';
 import * as chalk from 'chalk';
-import commandLineArgs from '../node_modules/command-line-args/dist/index.mjs';
+import commandLineArgs from 'command-line-args';
 import * as cmdUsage from 'command-line-usage';
 
 const cmdOptionDefinitions = [
