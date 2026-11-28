@@ -1,13 +1,18 @@
 import {jest} from '@jest/globals';
 import * as uuid from 'uuid';
-import * as cli from '../src/cli';
 
 jest.unstable_mockModule('clipboardy', () => ({
-    writeSync: jest.fn(),
+    default: { writeSync: jest.fn() },
 }));
-import * as clip from 'clipboardy';
+
+const { default: clip } = await import('clipboardy');
+const cli = await import('../src/cli.js');
 
 describe('uuid-cli', () => {
+
+    beforeEach(() => {
+        clip.writeSync.mockReset();
+    });
 
     afterEach(() => {
         jest.restoreAllMocks();
@@ -19,6 +24,12 @@ describe('uuid-cli', () => {
 
             expect(uuid.validate(output.id)).toBe(true);
             expect(uuid.version(output.id)).toBe(4);
+        });
+
+        it('should copy the generated UUID to the clipboard', () => {
+            const output = cli.run({ quiet: true });
+
+            expect(clip.writeSync).toHaveBeenCalledWith(output.id);
         });
     });
 
@@ -81,11 +92,9 @@ describe('uuid-cli', () => {
 
     describe('given clipboard not available', () => {
         beforeEach(() => {
-            jest.unstable_mockModule('clipboardy', () => ({
-                writeSync: jest.fn().mockImplementation(() => {
-                    throw new Error("Couldn't find the `xsel` binary and fallback didn't work. On Debian/Ubuntu you can install xsel with: sudo apt install xsel")
-                }),
-            }));
+            clip.writeSync.mockImplementation(() => {
+                throw new Error('Clipboard unavailable');
+            });
         });
 
         it('should not throw', () => {

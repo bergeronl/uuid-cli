@@ -1,5 +1,5 @@
 import * as uuid from 'uuid';
-import * as clip from 'clipboardy';
+import clip from 'clipboardy';
 import * as chalk from 'chalk';
 import commandLineArgs from 'command-line-args';
 import * as cmdUsage from 'command-line-usage';
